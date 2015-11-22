@@ -15,9 +15,10 @@ def who(text):
 
     test=[]
     for something in namedict:
-        test+=[namedict[something]]
+        test+=[[namedict[something],something]]
     
-    return test.sort()
+    test.sort()
+    return test[len(test)-1][1]
 
 def search(query):
     r = google.search(query,num=10,start=0,stop=10)
@@ -30,7 +31,7 @@ def search(query):
     u = urllib2.urlopen(l[0])
     page = u.read()
     #print page
-    soup = bs4.BeautifulSoup(page,'html')
+    soup = bs4.BeautifulSoup(page,"html.parser")
     raw = soup.get_text()
     #print raw
     text = re.sub("[\t\n ]"," ",raw)
