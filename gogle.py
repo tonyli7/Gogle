@@ -1,10 +1,22 @@
 import json,urllib2, google, bs4, re
 
 
-["who","when"]
-q=input();
+
+q=input();#prompts user
 
 def isName(name):
+    """
+    Checks if the name is a name using a dictionary api
+
+    Args:
+         name: A list of size 1 ["<first>","<last>"]
+
+    Returns:
+         True if the first AND last name is not a valid word in 
+         the dictionary api.
+         
+         False otherwise
+    """
     url="""
     http://dictionaryapi.net/api/definition/%s
     """
@@ -26,6 +38,21 @@ def isName(name):
     
 
 def getNames(text, dic):
+    """
+    Uses regex to parse the text in this format:
+
+    <1 uppercase followed by lowercase letters> <SPACE> <1 uppercase followed by lowercase letters>
+
+    Args:
+         text: A giant string from the url
+         dic: an empty dictionary
+
+    Returns:
+         Returns a dictionary of regexed names and their frequencies. 
+         Ex:
+    
+         {"Peter Parker":27, "Tobey Maguire":14}
+    """
     exp = "[A-Z][a-z]+ [A-Z][a-z]+"
     result = re.findall(exp,text);
     for name in result:
@@ -36,6 +63,19 @@ def getNames(text, dic):
     return dic
 
 def who(namedict):
+    """
+    Traverses namedict and puts it into a sorted list.
+    Traverses the list from highest frequencies to lowest
+    and returns the name that is validified first.
+
+    Args:
+         namedict: A dictionary of regexed names and their frequencies.
+                   (see getNames(text,dic))
+
+    Returns:
+         Returns a string of the name that has the highest frequency
+         AND is not in the english dictionary
+    """
     test=[]
     for something in namedict:
         test+=[[namedict[something],something]]
@@ -44,10 +84,19 @@ def who(namedict):
     print test
     for name in test[::-1]:
         if isName(name[1].split(" ")):
-            return name
+            return name[1]
     return test[-1][1]
 
 def search(query):
+    """
+    Uses the google module to search a query
+
+    Args:
+         query: A string from input()
+
+    Returns:
+         Returns a string of the answer to the query
+    """
     r = google.search(query,num=10,start=0,stop=10)
     namedict={}
     webnum=0
