@@ -12,7 +12,7 @@ To do:
 
 Searching with Google Search API
 
-Data Scraping with Ugly Soup
+Data Scraping with Beautiful Soup
 
 Regular Expression to parse out relevant data
 
@@ -20,4 +20,4 @@ Frequency Analysis of words
 
 Due 11/23/15
 
-pls hurry pls eesh rack and ton eeeee <33333333333333333333333333
+whoever uses this is a qt <3
