@@ -1,8 +1,29 @@
-import urllib2, google, bs4, re
+import json,urllib2, google, bs4, re
 
 
 ["who","when"]
 q=input();
+
+def isName(name):
+    url="""
+    http://dictionaryapi.net/api/definition/%s
+    """
+    url=url%(str(name[0]))
+    request_url = urllib2.urlopen(url)
+    result = request_url.read()
+    r = json.loads(result)
+    if r==[]:
+        url="""
+        http://dictionaryapi.net/api/definition/%s
+        """
+        url=url%(str(name[1]))
+        request_url = urllib2.urlopen(url)
+        result = request_url.read()
+        r = json.loads(result)
+        if r==[]:
+            return True
+    return False
+    
 
 def getNames(text, dic):
     exp = "[A-Z][a-z]+ [A-Z][a-z]+"
@@ -21,6 +42,9 @@ def who(namedict):
     
     test.sort()
     print test
+    for name in test[::-1]:
+        if isName(name[1].split(" ")):
+            return name
     return test[-1][1]
 
 def search(query):
@@ -47,3 +71,4 @@ def search(query):
 
 
 print search(q)
+#print isName(["peter","parker"])
