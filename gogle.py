@@ -2,7 +2,7 @@ import json,urllib2, google, bs4, re, when
 
 
 
-q=input();#prompts user
+##q=input();#prompts user
 
 def isName(name):
     """
@@ -137,6 +137,6 @@ def search(query):
     return answer(namedict,query)
 
 
-print search(q)
+##print search(q)
 #print isName(["peter","parker"])
 #print search('when was justin beiber born') is march 1 1994 
